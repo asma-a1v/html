@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ここにページのタイトル書くよ！</title>
-    <meta charset="utf-8" />
-    <link href="index.css" rel="stylesheet" type="text/css">
+<head>
+	<title>ここにページのタイトル書くよ！</title>
+	<meta charset="utf-8" />
+	<link href="index.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="index.js"></script>
-  </head>
-
-  <body>
-    <h1>1. h1タグの中身は、見出し1だよ！1番大きい見出しだよ！</h1>
-    <h2>1-1. h2タグの中身は、見出し2だよ！</h2>
-    <p>pタグの中には段落の塊を記述するよ！
-      <u>アンダーバーはuタグで囲むよ！</u>
-      <i>斜体はiタグで囲むよ！</i>
-      改行したいときは<br />って書くよ！
-    </p>
-    <h3>1-1-1. h3タグは見出し3だよ！</h3>
-    <p>見出しタグはh4,h5,h6とかもあるよ！h1タグが存在しないのにh2とかh3を使うのは良くないよ！</p>
-    <div>
-      <ul>
-        <li>りんご</li>
-        <li>バナナ</li>
-        <li>もも</li>
-      </ul>
-    </div>
-    <p>liタグはリストを書く時使う。liタグはulタグ（またはolタグ）で囲むことで使えるよ！</p>
-    <p>Hello World:D</p>
-    <svg class="ring" viewBox="25 25 50 50" stroke-width="5">
-      <circle cx="50" cy="50" r="20" />
-    </svg>
-  </body>
+</head>
+<body>
+	<h1>1. h1タグの中身は、見出し1だよ！1番大きい見出しだよ！</h1>
+	<h2>1-1. h2タグの中身は、見出し2だよ！</h2>
+	<p>pタグの中には段落の塊を記述するよ！
+		<u>アンダーバーはuタグで囲むよ！</u>
+		<i>斜体はiタグで囲むよ！</i>
+		改行したいときは<br />って書くよ！
+	</p>
+	<h3>1-1-1. h3タグは見出し3だよ！</h3>
+	<p>見出しタグはh4,h5,h6とかもあるよ！h1タグが存在しないのにh2とかh3を使うのは良くないよ！</p>
+	<div>
+		<ul>
+			<li>りんご</li>
+			<li>バナナ</li>
+			<li>もも</li>
+		</ul>
+	</div>
+	<p>liタグはリストを書く時使う。liタグはulタグ（またはolタグ）で囲むことで使えるよ！</p>
+	<p>Hello World:D</p>
+	<svg class="ring" viewBox="25 25 50 50" stroke-width="5">
+		<circle cx="50" cy="50" r="20" />
+	</svg>
+	<p><span id="winsize2"></span></p>
+	<script type="text/javascript">
+		//読み込み時の表示
+		window_load();
+		//ウィンドウサイズ変更時に更新
+		window.onresize = window_load;
+	</script>
+</body>
 </html>
