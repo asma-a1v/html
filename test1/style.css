@@ -1,0 +1,70 @@
+html, body{
+	height: 100%;
+}
+
+body{
+	background: #1d1d1d;
+	margin: 0px;
+	width: 2544px;
+	
+}
+
+.time_width_height{
+	width: 24px;
+	height: 150px;
+	background: #1d1d1d;
+	color: #FFFFFF;
+	border-bottom:1px solid #757575;
+	text-align: center;
+	line-height:150px;
+}
+
+.test2 {
+    background-color: #eee;
+    content-visibility: auto;
+    height: 3774px;
+    overflow: hidden;
+    position: relative;
+    width: 180px;
+}
+
+.test3 {
+    display: flex;
+    flex-direction: row;
+    margin-left: 24px;
+}
+
+.test4 {
+	height: 0px;
+}
+
+.test5 {
+	overflow: hidden;
+	margin-left: 24px;
+ }
+
+.test6 {
+	color: #FFFFFF;
+	float: left;
+	background: #1b1b1b;
+	padding: 1px 155.4px;
+	text-align: center;
+	border-right:1px solid #757575;
+	border-bottom:1px solid #757575;
+ }
+
+.test7 {
+	color: #FFFFFF;
+	float: left;
+	background: #1b1b1b;
+	padding: 1px 72.2px;
+	text-align: left;
+	border-right:1px solid #757575;
+ }
+
+.test8{
+	position: fixed;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+ }
