@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONデータをHTMLで表示</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table id="schedule-table">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>チャンネル</th>
+                <th>日付</th>
+                <th>時間</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // JSONデータ
+        const jsonData = {
+            "programs": [
+                {
+                    "title": "ドラマA",
+                    "details": [
+                        {
+                            "channel": "チャンネル1",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-16",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-17",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-18",
+                                    "time": "19:00"
+                                }
+                            ]
+                        },
+                        {
+                            "channel": "チャンネル2",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-19",
+                                    "time": "20:00"
+                                },
+                                {
+                                    "date": "2023-03-20",
+                                    "time": "20:00"
+                                }
+                            ]
+                        }
+                    ]
+                    
+                },
+                {
+                    "title": "ドラマB",
+                    "details": [
+                        {
+                            "channel": "チャンネル1",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-16",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-17",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-18",
+                                    "time": "19:00"
+                                }
+                            ]
+                        },
+                        {
+                            "channel": "チャンネル2",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-19",
+                                    "time": "20:00"
+                                },
+                                {
+                                    "date": "2023-03-20",
+                                    "time": "20:00"
+                                }
+                            ]
+                        }
+                    ]
+                    
+                }
+            ]
+        };
+
+        // JSONデータをHTMLテーブルに変換する
+        const tableBody = document.querySelector("#schedule-table tbody");
+
+        jsonData.programs.forEach(program => {
+            let isFirstDetail = true;
+            let titleRowCount = 0;
+            program.details.forEach(detail => {
+                titleRowCount += detail.schedule.length;
+            });
+
+            program.details.forEach((detail, detailIndex) => {
+                let isFirstSchedule = true;
+                detail.schedule.forEach((schedule, scheduleIndex) => {
+                    const row = document.createElement("tr");
+
+                    if (isFirstDetail && isFirstSchedule) {
+                        const titleCell = document.createElement("td");
+                        titleCell.textContent = program.title;
+                        titleCell.rowSpan = titleRowCount;
+                        row.appendChild(titleCell);
+                        isFirstDetail = false;
+                    }
+
+                    if (isFirstSchedule) {
+                        const channelCell = document.createElement("td");
+                        channelCell.textContent = detail.channel;
+                        channelCell.rowSpan = detail.schedule.length;
+                        row.appendChild(channelCell);
+                        isFirstSchedule = false;
+                    }
+
+                    const dateCell = document.createElement("td");
+                    dateCell.textContent = schedule.date;
+                    row.appendChild(dateCell);
+
+                    const timeCell = document.createElement("td");
+                    timeCell.textContent = schedule.time;
+                    row.appendChild(timeCell);
+
+                    tableBody.appendChild(row);
+                });
+            });
+        });
+    </script>
+</body
