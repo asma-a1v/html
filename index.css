@@ -9,7 +9,7 @@ body{
 
 p {
     color: yellow;
-    background-color: black;
+    background-color: rgb(255, 132, 132);
 }
 
 h1 {
@@ -34,7 +34,7 @@ h1 {
 .ring {
     --uib-size: 40px;
     --uib-speed: 2s;
-    --uib-color: black;
+    --uib-color: rgb(0, 0, 0);
     
     height: var(--uib-size);
     width: var(--uib-size);
