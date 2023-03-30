@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONデータをHTMLで表示</title>
+    <style>
+        .schedule {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .schedule-column {
+            width: calc(33% - 20px);
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .schedule-title {
+            font-weight: bold;
+        }
+        .schedule-channel {
+            margin-bottom: 10px;
+        }
+        .schedule-time {
+            display: block;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>ドラマのスケジュール</h1>
+    <div id="schedule-container" class="schedule">
+    </div>
+
+    <script>
+        // JSONデータ
+        const jsonData = {
+            "programs": [
+                {
+                    "title": "ドラマA",
+                    "details": [
+                        {
+                            "channel": "チャンネル1",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-16",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-17",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-18",
+                                    "time": "19:00"
+                                }
+                            ]
+                        },
+                        {
+                            "channel": "チャンネル2",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-19",
+                                    "time": "20:00"
+                                },
+                                {
+                                    "date": "2023-03-20",
+                                    "time": "20:00"
+                                }
+                            ]
+                        },
+                        {
+                            "channel": "チャンネル3",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-19",
+                                    "time": "20:00"
+                                }
+                            ]
+                        }
+                    ]
+                    
+                },
+                {
+                    "title": "ドラマB",
+                    "details": [
+                        {
+                            "channel": "チャンネル1",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-16",
+                                    "time": "18:00"
+                                },
+                                {
+                                    "date": "2023-03-17",
+                                    "time": "19:00"
+                                },
+                                {
+                                    "date": "2023-03-18",
+                                    "time": "19:00"
+                                }
+                            ]
+                        },
+                        {
+                            "channel": "チャンネル2",
+                            "schedule": [
+                                {
+                                    "date": "2023-03-19",
+                                    "time": "20:00"
+                                },
+                                {
+                                    "date": "2023-03-20",
+                                    "time": "20:00"
+                                }
+                            ]
+                        }
+                    ]
+                    
+                }
+            ]
+        };
+
+        // JSONデータを日付ごとに列にして、時間順に並び替える
+        const scheduleContainer = document.querySelector("#schedule-container");
+
+        // すべての日付を取得する
+        const datesSet = new Set();
+        jsonData.programs.forEach(program => {
+            program.details.forEach(detail => {
+                detail.schedule.forEach(schedule => {
+                    datesSet.add(schedule.date);
+                });
+            });
+        });
+
+        const dates = Array.from(datesSet);
+        dates.sort();
+
+        dates.forEach(date => {
+            const scheduleColumn = document.createElement("div");
+            scheduleColumn.className = "schedule-column";
+            scheduleColumn.innerHTML = `<h2 class="schedule-title">${date}</h2>`;
+
+            const schedules = [];
+
+            jsonData.programs.forEach(program => {
+                program.details.forEach(detail => {
+                    detail.schedule.forEach(schedule => {
+                        if (schedule.date === date) {
+                            schedules.push({
+                                title: program.title,
+                                channel: detail.channel,
+                                time: schedule.time
+                            });
+                        }
+                    });
+                });
+            });
+
+            schedules.sort((a, b) => {
+                const timeA = new Date(`1970-01-01T${a.time}`);
+                const timeB = new Date(`1970-01-01T${b.time}`);
+                return timeA - timeB;
+            });
+
+            schedules.forEach(schedule => {
+                const scheduleItem = document.createElement("div");
+                scheduleItem.innerHTML = `
+                    <h3 class="schedule-title">${schedule.title}</h3>
+                    <p class="schedule-channel">${schedule.channel}</p>
+                    <span class="schedule-time">${schedule.time}</span>
+                `;
+                scheduleColumn.appendChild(scheduleItem);
+            });
+
+            scheduleContainer.appendChild(scheduleColumn);
+        });
+    </script>
+</body>
+</html>
