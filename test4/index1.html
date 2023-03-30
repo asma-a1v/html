@@ -49,6 +49,26 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+        // 日付を変換する関数
+        function formatDate(dateStr) {
+            const datePattern = /^(\d{1,2})\/(\d{1,2})\((.+)\)$/;
+            const match = dateStr.match(datePattern);
+                
+            if (match) {
+                const month = parseInt(match[1], 10);
+                const day = parseInt(match[2], 10);
+                const dayOfWeek = match[3];
+            
+                return `${month}/${day}(${dayOfWeek})`;
+            } else {
+                return dateStr;
+            }
+        }
+
+
+
+        
+        
         fetch('data.json')
         .then(response => {
             if (!response.ok) {
@@ -72,9 +92,10 @@
             dates.sort();
 
             dates.forEach(date => {
-                const scheduleColumn = document.createElement("div");
-                scheduleColumn.className = "schedule-column";
-                scheduleColumn.innerHTML = `<h2 class="schedule-title">${date}</h2>`;
+            const scheduleColumn = document.createElement("div");
+            scheduleColumn.className = "schedule-column";
+            scheduleColumn.innerHTML = `<h2 class="schedule-title">${formatDate(date)}</h2>`; // 変更: formatDate関数を使用して日付を変換
+
 
                 const schedules = [];
 
