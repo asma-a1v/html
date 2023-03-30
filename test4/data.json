@@ -1,6 +1,20 @@
 {
     "programs": [
         {
+            "title": "極主夫道 シーズン2",
+            "details": [
+                {
+                    "channel": "ネット",
+                    "schedule": [
+                        {
+                            "date": "1/1(日)",
+                            "time": "-"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "title": "転生王女と天才令嬢の魔法革命",
             "details": [
                 {
@@ -340,12 +354,7 @@
                             "time": "24:00"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "title": "NieR:Automata Ver1.2a",
-            "details": [
+                },
                 {
                     "channel": "読売テレビ",
                     "schedule": [
@@ -368,12 +377,7 @@
                             "time": "24:30"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "title": "魔王学院の不適合者 第3期 前半クール",
-            "details": [
+                },
                 {
                     "channel": "読売テレビ",
                     "schedule": [
@@ -396,12 +400,7 @@
                             "time": "25:00"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "title": "イジらないで、長瀞さん 3nd Attack",
-            "details": [
+                },
                 {
                     "channel": "MBS",
                     "schedule": [
@@ -698,12 +697,7 @@
                             "time": "25:30"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "title": "痛いのは嫌なので防御力に極振りしたいと思います。3",
-            "details": [
+                },
                 {
                     "channel": "ABCテレビ",
                     "schedule": [
