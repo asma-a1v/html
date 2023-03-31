@@ -61,6 +61,12 @@
             }
         }
 
+        // 曜日の並びをソートする関数
+        function sortDaysOfWeek(a, b) {
+            const order = ['月', '火', '水', '木', '金', '土', '日'];
+            return order.indexOf(a) - order.indexOf(b);
+        }
+
         fetch('data.json')
         .then(response => {
             if (!response.ok) {
@@ -81,6 +87,9 @@
             });
 
             const daysOfWeek = Array.from(dayOfWeekSet);
+
+            // 曜日の並びをソート
+            daysOfWeek.sort(sortDaysOfWeek);
 
             daysOfWeek.forEach(dayOfWeek => {
                 const scheduleColumn = document.createElement("div");
