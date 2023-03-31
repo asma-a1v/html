@@ -17,13 +17,13 @@
         }
 
         .schedule-column {
-            flex: none; /* 修正: flex-growとflex-basisの値を無効にし、固定幅を設定できるようにする */
+            flex: none;
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 20px;
             box-sizing: border-box;
             display: inline-block;
-            width: 400px; /* 追加: 枠の幅を指定 */
+            width: 400px;
         }
 
         .schedule-title {
@@ -49,6 +49,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+        // 日付を曜日に変換する関数
+        function getDayOfWeek(dateStr) {
+            const datePattern = /^(\d{1,2})\/(\d{1,2})\((.+)\)$/;
+            const match = dateStr.match(datePattern);
+                
+            if (match) {
+                return match[3];
+            } else {
+                return '';
+            }
+        }
+
         fetch('data.json')
         .then(response => {
             if (!response.ok) {
@@ -59,29 +71,28 @@
         .then(jsonData => {
             const scheduleContainer = document.querySelector("#schedule-container");
 
-            const datesSet = new Set();
+            const dayOfWeekSet = new Set();
             jsonData.programs.forEach(program => {
                 program.details.forEach(detail => {
                     detail.schedule.forEach(schedule => {
-                        datesSet.add(schedule.date);
+                        dayOfWeekSet.add(getDayOfWeek(schedule.date));
                     });
                 });
             });
 
-            const dates = Array.from(datesSet);
-            dates.sort();
+            const daysOfWeek = Array.from(dayOfWeekSet);
 
-            dates.forEach(date => {
+            daysOfWeek.forEach(dayOfWeek => {
                 const scheduleColumn = document.createElement("div");
                 scheduleColumn.className = "schedule-column";
-                scheduleColumn.innerHTML = `<h2 class="schedule-title">${date}</h2>`;
+                scheduleColumn.innerHTML = `<h2 class="schedule-title">${dayOfWeek}曜日</h2>`;
 
                 const schedules = [];
 
                 jsonData.programs.forEach(program => {
                     program.details.forEach(detail => {
                         detail.schedule.forEach(schedule => {
-                            if (schedule.date === date) {
+                            if (getDayOfWeek(schedule.date) === dayOfWeek) {
                                 schedules.push({
                                     title: program.title,
                                     channel: detail.channel,
