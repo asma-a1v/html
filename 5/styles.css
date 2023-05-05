@@ -38,6 +38,17 @@ height: 150px;
 user-select: none;         
 }
 
+.drag-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  background-color: #333;
+  cursor: move;
+}
+
 .identifier {
 position: absolute;
 top: 10px;

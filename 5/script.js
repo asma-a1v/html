@@ -4,6 +4,8 @@ const boxContainer = document.getElementById('box-container');
 let activeBox = null;
 let offsetX = 0;
 let offsetY = 0;
+let touchOffsetX = 0;
+let touchOffsetY = 0;
 
 carInfoForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -30,6 +32,11 @@ function createDraggableBox(identifier, time, carType1, carType2, carType3, plat
   identifierElement.classList.add('identifier');
   identifierElement.textContent = identifier;
   draggableBox.appendChild(identifierElement);
+
+  // ここにドラッグハンドルを追加します
+  const dragHandle = document.createElement('div');
+  dragHandle.classList.add('drag-handle');
+  draggableBox.appendChild(dragHandle);
 
   const removeBtn = document.createElement('div');
   removeBtn.classList.add('remove-btn');
@@ -73,11 +80,12 @@ function createDraggableBox(identifier, time, carType1, carType2, carType3, plat
 
   // タッチイベントリスナー
   draggableBox.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    activeBox = draggableBox;
+    if (!e.target.classList.contains('drag-handle')) return;
     const touch = e.touches[0];
-    offsetX = touch.clientX - draggableBox.getBoundingClientRect().left;
-    offsetY = touch.clientY - draggableBox.getBoundingClientRect().top;
+    activeBox = draggableBox;
+    touchOffsetX = touch.clientX - draggableBox.getBoundingClientRect().left;
+    touchOffsetY = touch.clientY - draggableBox.getBoundingClientRect().top;
+    e.preventDefault();
   });
 }
 
@@ -94,13 +102,12 @@ document.addEventListener('mouseup', () => {
 
 document.addEventListener('touchmove', (e) => {
   if (!activeBox) return;
-  e.preventDefault();
   const touch = e.touches[0];
-  activeBox.style.left = `${touch.clientX - offsetX}px`;
-  activeBox.style.top = `${touch.clientY - offsetY}px`;
+  activeBox.style.left = `${touch.clientX - touchOffsetX}px`;
+  activeBox.style.top = `${touch.clientY - touchOffsetY}px`;
+  e.preventDefault();
 });
 
 document.addEventListener('touchend', () => {
   activeBox = null;
 });
-
