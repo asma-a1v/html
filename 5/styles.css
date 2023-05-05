@@ -1,83 +1,69 @@
-const carInfoForm = document.getElementById('car-info-form');
-const boxContainer = document.getElementById('box-container');
-
-let activeBox = null;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  carInfoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const identifier = document.getElementById('identifier').value;
-    const hour = document.getElementById('hour').value;
-    const minute = document.getElementById('minute').value;
-    const carType1 = document.getElementById('car-type1').value;
-    const carType2 = document.getElementById('car-type2').value;
-    const carType3 = document.getElementById('car-type3').value;
-    const plateRegion = document.getElementById('plate-region').value;
-    const plateNumber = document.getElementById('plate-number').value;
-    const plateHiragana = document.getElementById('plate-hiragana').value;
-    const plateSerial = document.getElementById('plate-serial').value;
-
-    createDraggableBox(identifier, `${hour}:${minute}`, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial);
-  });
-
-function createDraggableBox(identifier, time, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial) {
-    const draggableBox = document.createElement('div');
-    draggableBox.classList.add('draggable-box');
-  
-    const identifierElement = document.createElement('div');
-    identifierElement.classList.add('identifier');
-    identifierElement.textContent = identifier;
-    draggableBox.appendChild(identifierElement);
-  
-    const removeBtn = document.createElement('div');
-    removeBtn.classList.add('remove-btn');
-    removeBtn.textContent = '✕';
-    draggableBox.appendChild(removeBtn);
-  
-    // 削除ボタンのクリックイベントリスナー
-    removeBtn.addEventListener('click', () => {
-      boxContainer.removeChild(draggableBox);
-    });
-  
-    const boxContent = document.createElement('div');
-    boxContent.classList.add('box-content');
-  
-    const timeElement = document.createElement('div');
-    timeElement.classList.add('info-line');
-    timeElement.textContent = time;
-    boxContent.appendChild(timeElement);
-  
-    const carTypeElement = document.createElement('div');
-    carTypeElement.classList.add('info-line');
-    carTypeElement.innerHTML = `${carType1} ${carType2}<br>${carType3}`;
-    boxContent.appendChild(carTypeElement);
-  
-    const plateInfoElement = document.createElement('div');
-    plateInfoElement.classList.add('plate-info');
-    plateInfoElement.innerHTML = `${plateRegion} ${plateNumber}<br>${plateHiragana} ${plateSerial}`;
-    boxContent.appendChild(plateInfoElement);
-  
-    draggableBox.appendChild(boxContent);
-  
-    boxContainer.appendChild(draggableBox);
-  
-    draggableBox.addEventListener('mousedown', (e) => {
-      activeBox = draggableBox;
-      offsetX = e.clientX - draggableBox.getBoundingClientRect().left;
-      offsetY = e.clientY - draggableBox.getBoundingClientRect().top;
-    });
+body {
+  height: 100vh;
+  margin: 0;
 }
-  
 
-document.addEventListener('mousemove', (e) => {
-    if (!activeBox) return;
-    activeBox.style.left = `${e.clientX - offsetX}px`;
-    activeBox.style.top = `${e.clientY - offsetY}px`;
-});
+#sidebar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
 
-document.addEventListener('mouseup', () => {
-    activeBox = null;
-});
+#box-container {
+  padding-top: 210px;
+}
 
+#hour, #minute {
+width: 40px;
+text-align: center;
+margin-right: 2px;
+}
+
+.box-content {
+padding-top: 25px;
+}
+
+.draggable-box {
+position: absolute;
+background-color: #f1f1f1;
+border: 1px solid #d4d4d4;
+text-align: center;
+padding: 10px;
+cursor: move;
+width: 120px;
+height: 150px;
+}
+
+.identifier {
+position: absolute;
+top: 10px;
+left: 10px;
+}
+
+.remove-btn {
+position: absolute;
+top: 10px;
+right: 10px;
+cursor: pointer;
+}
+
+.info-line {
+border-bottom: 1px dashed #333;
+margin-bottom: 5px;
+padding-bottom: 5px;
+display: inline-block; /* この行を追加 */
+width: 100%; /* この行を追加 */
+}
+
+.plate-info {
+line-height: 1.2;
+}
+
+input[type="text"]#plate-region,
+input[type="text"]#plate-number,
+input[type="text"]#plate-hiragana,
+input[type="text"]#plate-serial {
+  width: auto;
+  width: 60px;
+  margin-right: 5px;
+}
