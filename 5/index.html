@@ -72,7 +72,20 @@
             </select>
             <input type="text" id="car-type3" required><br>
             <label for="plate">ナンバープレート</label>
-            <input type="text" id="plate-region" maxlength="4" required>
+            <input type="text" id="plate-region" list="plate-region-list" required>
+            <datalist id="plate-region-list">
+              <option value="京都">
+              <option value="滋賀">
+              <option value="奈良">
+              <option value="飛鳥">
+              <option value="神戸">
+              <option value="姫路">
+              <option value="なにわ">
+              <option value="大阪">
+              <option value="和泉">
+              <option value="堺">
+              <option value="和歌山">
+            </datalist>
             <input type="text" id="plate-number" maxlength="3" required>
             <select id="plate-hiragana" required>
                 <option value="わ">わ</option>
