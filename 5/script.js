@@ -2,8 +2,24 @@ const carInfoForm = document.getElementById('car-info-form');
 const boxContainer = document.getElementById('box-container');
 
 let activeBox = null;
-  let offsetX = 0;
-  let offsetY = 0;
+let offsetX = 0;
+let offsetY = 0;
+
+const savedData = JSON.parse(localStorage.getItem('draggableBoxes')) || [];
+savedData.forEach(boxData => {
+  createDraggableBox(
+    boxData.identifier,
+    boxData.time,
+    boxData.carType1,
+    boxData.carType2,
+    boxData.carType3,
+    boxData.plateRegion,
+    boxData.plateNumber,
+    boxData.plateHiragana,
+    boxData.plateSerial,
+    boxData.position
+  );
+});
 
   carInfoForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -22,7 +38,8 @@ let activeBox = null;
     createDraggableBox(identifier, `${hour}:${minute}`, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial);
   });
 
-function createDraggableBox(identifier, time, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial) {
+  function createDraggableBox(identifier, time, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial, position = null) {
+    
     const draggableBox = document.createElement('div');
     draggableBox.classList.add('draggable-box');
   
@@ -58,6 +75,11 @@ function createDraggableBox(identifier, time, carType1, carType2, carType3, plat
     plateInfoElement.classList.add('plate-info');
     plateInfoElement.innerHTML = `${plateRegion} ${plateNumber}<br>${plateHiragana} ${plateSerial}`;
     boxContent.appendChild(plateInfoElement);
+
+    if (position) {
+      draggableBox.style.left = position.left;
+      draggableBox.style.top = position.top;
+    }
   
     draggableBox.appendChild(boxContent);
   
@@ -81,3 +103,27 @@ document.addEventListener('mouseup', () => {
     activeBox = null;
 });
 
+document.addEventListener('mouseup', () => {
+  if (!activeBox) return;
+
+  const draggableBoxesData = Array.from(boxContainer.children).map((box) => {
+    return {
+      identifier: box.querySelector('.identifier').textContent,
+      time: box.querySelector('.info-line').textContent,
+      carType1: box.querySelector('.info-line').nextElementSibling.textContent.split(' ')[0],
+      carType2: box.querySelector('.info-line').nextElementSibling.textContent.split(' ')[1],
+      carType3: box.querySelector('.info-line').nextElementSibling.nextElementSibling.textContent,
+      plateRegion: box.querySelector('.plate-info').textContent.split(' ')[0],
+      plateNumber: box.querySelector('.plate-info').textContent.split(' ')[1],
+      plateHiragana: box.querySelector('.plate-info').nextElementSibling.textContent.split(' ')[0],
+      plateSerial: box.querySelector('.plate-info').nextElementSibling.textContent.split(' ')[1],
+      position: {
+        left: box.style.left,
+        top: box.style.top
+      }
+    };
+  });
+
+  localStorage.setItem('draggableBoxes', JSON.stringify(draggableBoxesData));
+  activeBox = null;
+});
