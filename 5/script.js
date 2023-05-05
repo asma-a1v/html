@@ -53,7 +53,6 @@ savedData.forEach(boxData => {
     removeBtn.textContent = '✕';
     draggableBox.appendChild(removeBtn);
   
-    // 削除ボタンのクリックイベントリスナー
     removeBtn.addEventListener('click', () => {
       boxContainer.removeChild(draggableBox);
     });
