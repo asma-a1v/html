@@ -32,6 +32,10 @@ padding: 10px;
 cursor: move;
 width: 120px;
 height: 150px;
+-webkit-user-select: none; 
+-moz-user-select: none;    
+-ms-user-select: none;     
+user-select: none;         
 }
 
 .identifier {
