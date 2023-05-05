@@ -84,16 +84,19 @@ document.addEventListener('mouseup', () => {
 
 function saveDataToLocalStorage() {
   const draggableBoxesData = Array.from(boxContainer.children).map((box) => {
+    const timeElement = box.querySelector('.info-line');
+    const carTypeElement = timeElement.nextElementSibling;
+    const plateInfoElement = carTypeElement.nextElementSibling;
     return {
       identifier: box.querySelector('.identifier').textContent,
-      time: box.querySelector('.info-line').textContent,
-      carType1: box.querySelector('.info-line').nextElementSibling.textContent.split(' ')[0],
-      carType2: box.querySelector('.info-line').nextElementSibling.textContent.split(' ')[1],
-      carType3: box.querySelector('.info-line').nextElementSibling.nextElementSibling.textContent,
-      plateRegion: box.querySelector('.plate-info').textContent.split(' ')[0],
-      plateNumber: box.querySelector('.plate-info').textContent.split(' ')[1],
-      plateHiragana: box.querySelector('.plate-info').nextElementSibling.textContent.split(' ')[0],
-      plateSerial: box.querySelector('.plate-info').nextElementSibling.textContent.split(' ')[1],
+      time: timeElement.textContent,
+      carType1: carTypeElement.textContent.split(' ')[0],
+      carType2: carTypeElement.textContent.split(' ')[1],
+      carType3: carTypeElement.nextElementSibling.textContent,
+      plateRegion: plateInfoElement.textContent.split(' ')[0],
+      plateNumber: plateInfoElement.textContent.split(' ')[1],
+      plateHiragana: plateInfoElement.nextElementSibling.textContent.split(' ')[0],
+      plateSerial: plateInfoElement.nextElementSibling.textContent.split(' ')[1],
       position: {
         left: box.style.left,
         top: box.style.top
@@ -102,6 +105,7 @@ function saveDataToLocalStorage() {
   });
   localStorage.setItem('draggableBoxesData', JSON.stringify(draggableBoxesData));
 }
+
 
 function loadDataFromLocalStorage() {
   const draggableBoxesData = JSON.parse(localStorage.getItem('draggableBoxesData'));
