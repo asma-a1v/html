@@ -14,6 +14,8 @@
             <select id="identifier" required>
                 <option value="レ">レ</option>
                 <option value="ア">ア</option>
+                <option value="発">発</option>
+                <option value="着">着</option>
             </select><br>
             <label for="hour">時間</label>
             <input type="text" id="hour" placeholder="00" maxlength="2" required>
@@ -92,12 +94,38 @@
                 <option value="れ">れ</option>
             </select>
             <input type="text" id="plate-serial" maxlength="4" required><br>
+            <label for="remarks">備考</label>
+            <textarea id="remarks" class="remarks-input" rows="4" cols="30"></textarea>
+            <br>
             <button type="submit">登録</button>
         </form>
         <hr>
     </div>
+   <div id="modal" class="modal">
+     <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-remarks"></p>
+     </div>
+   </div>
     <div id="box-container"></div>
     <script src="script.js"></script>
+  <script>
+    // 他のJavaScriptコード
+
+    // 4. モーダルウィンドウを閉じるイベントリスナーを追加
+    const modal = document.getElementById('modal');
+    const closeButton = document.getElementsByClassName('close')[0];
+
+    closeButton.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
 <!-->

@@ -20,11 +20,13 @@ carInfoForm.addEventListener('submit', (e) => {
   const plateNumber = document.getElementById('plate-number').value;
   const plateHiragana = document.getElementById('plate-hiragana').value;
   const plateSerial = document.getElementById('plate-serial').value;
+  const remarks = document.getElementById('remarks').value; 
 
-  createDraggableBox(identifier, `${hour}:${minute}`, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial);
+  createDraggableBox(identifier, `${hour}:${minute}`, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial, remarks); 
 });
 
-function createDraggableBox(identifier, time, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial) {
+
+function createDraggableBox(identifier, time, carType1, carType2, carType3, plateRegion, plateNumber, plateHiragana, plateSerial, remarks) {
   const draggableBox = document.createElement('div');
   draggableBox.classList.add('draggable-box');
 
@@ -65,6 +67,19 @@ function createDraggableBox(identifier, time, carType1, carType2, carType3, plat
   plateInfoElement.classList.add('plate-info');
   plateInfoElement.innerHTML = `${plateRegion} ${plateNumber}<br>${plateHiragana} ${plateSerial}`;
   boxContent.appendChild(plateInfoElement);
+  
+  const remarksButton = document.createElement('button');
+  remarksButton.classList.add('remarks-button');
+  remarksButton.textContent = '備考';
+  draggableBox.appendChild(remarksButton);
+
+// ボタンのクリックイベントリスナー
+  remarksButton.addEventListener('click', () => {
+    const modal = document.getElementById('modal');
+    const modalRemarks = document.getElementById('modal-remarks');
+    modalRemarks.textContent = remarks;
+    modal.style.display = 'block';
+  });
 
   draggableBox.appendChild(boxContent);
 
