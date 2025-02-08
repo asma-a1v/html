@@ -1,20 +1,80 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta charset="utf-8">
-<title></title>
-<link href="style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブラウザウィンドウサイズ表示サンプル</title>
+    <style>
+        /* 基本のリセット */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* ボディスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaeaea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        /* コンテナスタイル */
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        
+        .container h1 {
+            margin-bottom: 20px;
+            color: #333333;
+            font-size: 1.5em;
+        }
+        
+        .container p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #555555;
+        }
+        
+        .container span {
+            font-weight: bold;
+            color: #000000;
+        }
+    </style>
 </head>
 <body>
-	<p><span id="winsize2"></span></p>
-	<script type="text/javascript">
-		//読み込み時の表示
-		window_load();
-		
-		//ウィンドウサイズ変更時に更新
-		window.onresize = window_load;
-		
-		</script>
+    <div class="container">
+        <h1>現在のブラウザウィンドウサイズ</h1>
+        <p>幅: <span id="width">0</span>px</p>
+        <p>高さ: <span id="height">0</span>px</p>
+    </div>
+
+    <script>
+        // ウィンドウサイズを取得して表示する関数
+        function updateWindowSize() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            document.getElementById('width').textContent = width;
+            document.getElementById('height').textContent = height;
+        }
+
+        // DOMが完全に読み込まれた後に実行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初期サイズを表示
+            updateWindowSize();
+
+            // ウィンドウがリサイズされるたびにサイズを更新
+            window.addEventListener('resize', updateWindowSize);
+        });
+    </script>
 </body>
 </html>
