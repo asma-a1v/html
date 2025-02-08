@@ -3,77 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ブラウザウィンドウサイズ表示サンプル</title>
+    <title>ウィンドウサイズ表示</title>
     <style>
-        /* 基本のリセット */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        /* ボディスタイル */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eaeaea;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .size-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .size-item {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 8px 0;
+            font-size: 18px;
         }
-        
-        /* コンテナスタイル */
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
+
+        .size-label {
+            color: #ccc;
         }
-        
-        .container h1 {
-            margin-bottom: 20px;
-            color: #333333;
-            font-size: 1.5em;
+
+        .size-value {
+            color: #00ff88;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
         }
-        
-        .container p {
-            font-size: 1.2em;
-            margin: 10px 0;
-            color: #555555;
-        }
-        
-        .container span {
-            font-weight: bold;
-            color: #000000;
+
+        /* レスポンシブ対応 */
+        @media (max-width: 480px) {
+            .size-display {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                padding: 12px;
+            }
+            
+            .size-item {
+                font-size: 16px;
+                gap: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>現在のブラウザウィンドウサイズ</h1>
-        <p>幅: <span id="width">0</span>px</p>
-        <p>高さ: <span id="height">0</span>px</p>
+    <div class="size-display">
+        <div class="size-item">
+            <span class="size-label">Width</span>
+            <span class="size-value" id="width">0px</span>
+        </div>
+        <div class="size-item">
+            <span class="size-label">Height</span>
+            <span class="size-value" id="height">0px</span>
+        </div>
     </div>
 
     <script>
-        // ウィンドウサイズを取得して表示する関数
-        function updateWindowSize() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+        // 要素参照の取得
+        const widthElement = document.getElementById('width');
+        const heightElement = document.getElementById('height');
+        
+        // サイズ更新関数
+        const updateSize = () => {
+            widthElement.textContent = `${window.innerWidth}px`;
+            heightElement.textContent = `${window.innerHeight}px`;
+            
+            // サイズに応じて背景色を変更
+            const hue = Math.min(window.innerWidth * 0.3, 360);
+            document.body.style.backgroundColor = `hsl(${hue}, 50%, 95%)`;
+        };
 
-            document.getElementById('width').textContent = width;
-            document.getElementById('height').textContent = height;
-        }
+        // デバウンス処理付きリサイズリスナー
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateSize, 100);
+        });
 
-        // DOMが完全に読み込まれた後に実行
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初期サイズを表示
-            updateWindowSize();
+        // 初期化処理
+        updateSize();
+        
+        // オプション: 数値のアニメーション効果
+        const animateValues = (element, newValue) => {
+            element.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 200);
+        };
 
-            // ウィンドウがリサイズされるたびにサイズを更新
-            window.addEventListener('resize', updateWindowSize);
+        // リサイズ時のアニメーション追加
+        window.addEventListener('resize', () => {
+            animateValues(widthElement);
+            animateValues(heightElement);
         });
     </script>
 </body>
