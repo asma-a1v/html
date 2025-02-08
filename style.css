@@ -1,74 +1,7 @@
 html{
-  height: 100%;
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+
 }
 
 body{
 	
 }
-
-p {
-    color: yellow;
-    background-color: rgb(255, 132, 132);
-}
-
-h1 {
-    color: aqua;
-}
-
-.gradient__background {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  border-radius: 50%;
-  height: 250px;
-  width: 250px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-
-.ring {
-    --uib-size: 40px;
-    --uib-speed: 2s;
-    --uib-color: rgb(0, 0, 0);
-    
-    height: var(--uib-size);
-    width: var(--uib-size);
-    vertical-align: middle;
-    transform-origin: center;
-    animation: rotate var(--uib-speed) linear infinite;
-}
-  
-.ring circle {
-    fill: none;
-    stroke: var(--uib-color);
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-    stroke-linecap: round;
-    animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
-}
-  
-@keyframes rotate {
-    100% {
-      transform: rotate(360deg);
-    }
-}
-  
-@keyframes stretch {
-    0% {
-      stroke-dasharray: 1, 200;
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dasharray: 90, 200;
-      stroke-dashoffset: -35px;
-    }
-    100% {
-      stroke-dashoffset: -124px;
-    }
-}
-  
