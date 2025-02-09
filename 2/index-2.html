@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>多様なサンプルページ</title>
+  <link rel="stylesheet" href="styles-2.css">
+</head>
+<body>
+  <header>
+    <h1>サンプルページへようこそ</h1>
+    <nav>
+      <ul>
+        <li><a href="#section1">フォーム</a></li>
+        <li><a href="#section2">カウンター</a></li>
+        <li><a href="#section3">Canvasアニメーション</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <!-- セクション1: フォームのサンプル -->
+    <section id="section1">
+      <h2>フォームのサンプル</h2>
+      <form id="sampleForm">
+        <label for="name">名前:</label>
+        <input type="text" id="name" name="name" placeholder="あなたの名前を入力">
+        <br>
+        <label for="email">メールアドレス:</label>
+        <input type="email" id="email" name="email" placeholder="example@example.com">
+        <br>
+        <button type="submit">送信</button>
+      </form>
+    </section>
+
+    <!-- セクション2: インタラクティブなカウンター -->
+    <section id="section2">
+      <h2>インタラクティブなカウンター</h2>
+      <div id="counterContainer">
+        <button id="decrement">-</button>
+        <span id="counterValue">0</span>
+        <button id="increment">+</button>
+      </div>
+    </section>
+    
+    <!-- セクション3: Canvasを使ったアニメーション -->
+    <section id="section3">
+      <h2>Canvasとアニメーション</h2>
+      <canvas id="sampleCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+    </section>
+
+    <!-- その他のサンプル -->
+    <section id="misc">
+      <h2>その他のサンプル</h2>
+      <!-- カードレイアウトのサンプル -->
+      <div class="card">
+        <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+        <div class="card-content">
+          <h3>カードタイトル</h3>
+          <p>これはカードのサンプルです。CSS Grid や Flexbox を使ってレイアウトしています。</p>
+        </div>
+      </div>
+
+      <!-- アラートボックスのサンプル -->
+      <div class="alert" id="alertBox">
+        <p>これはアラートボックスです。クリックして閉じます。</p>
+        <button id="closeAlert">×</button>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 サンプルページ</p>
+  </footer>
+  
+  <script src="script-2.js"></script>
+</body>
+</html>
