@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML/CSS/JS サンプル</title>
+  <!-- 外部CSSファイルの読み込み -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <h1>HTML/CSS/JS サンプルページ</h1>
+    <nav>
+      <ul>
+        <li><a href="#section1">Section1</a></li>
+        <li><a href="#section2">Section2</a></li>
+        <li><a href="#section3">Section3</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main>
+    
+    <!-- Section 1: 画像とテキスト -->
+    <section id="section1">
+      <h2>Section1: 画像とテキスト</h2>
+      <figure>
+        <img src="https://picsum.photos/300/200" alt="ランダムな画像">
+        <figcaption>Fig1. ランダム画像の例</figcaption>
+      </figure>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Nunc imperdiet erat in diam mollis, at ullamcorper ligula porttitor. 
+        <strong>太字テキスト</strong> や <em>斜体テキスト</em> を使うこともできます。
+      </p>
+      <blockquote>
+        これは引用テキストです。何かの文献から引用する際に使用します。
+      </blockquote>
+    </section>
+
+    <!-- Section 2: テーブル -->
+    <section id="section2">
+      <h2>Section2: テーブル</h2>
+      <table>
+        <caption>サンプルテーブル</caption>
+        <thead>
+          <tr>
+            <th>ヘッダー1</th>
+            <th>ヘッダー2</th>
+            <th>ヘッダー3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>セル1</td>
+            <td>セル2</td>
+            <td>セル3</td>
+          </tr>
+          <tr>
+            <td>セル4</td>
+            <td>セル5</td>
+            <td>セル6</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 3: フォームとJavaScriptの連動 -->
+    <section id="section3">
+      <h2>Section3: フォームとJavaScriptの連動</h2>
+      <form id="sampleForm">
+        <div>
+          <label for="name">名前</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="message">メッセージ</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit">送信</button>
+      </form>
+
+      <!-- Ajax風にページをリロードせずにメッセージ表示 -->
+      <div id="result"></div>
+    </section>
+
+    <!-- おまけ：詳細と要約 -->
+    <section>
+      <h2>Details/summary の例</h2>
+      <details>
+        <summary>クリックで詳細表示/非表示</summary>
+        <p>詳細コンテンツ：ここに隠したい情報や追加情報を書くことができます。</p>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer>
+    <p>&copy; 2025 Sample. All rights reserved.</p>
+  </footer>
+
+  <!-- 外部JSファイルの読み込み -->
+  <script src="script.js"></script>
+</body>
+</html>
